@@ -1,0 +1,114 @@
+@import "_colors";
+@mixin transform($prop) {
+  -webkit-transform: $prop;
+  -ms-transform: $prop;
+  transform: $prop;
+}
+%extends{
+  padding: 10px;
+  color: #000;
+  margin: 5px;
+}
+
+$state: (  danger: red,warning: yellow,help: green);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+
+  section {
+    padding: 40px 0;
+
+    h1 {
+      color: $accent;
+      margin-bottom: 15px;
+    }
+  }
+
+  section:nth-child(1) {
+    div {
+      display: -webkit-flex;
+      display: -ms-flex;
+      display: flex;
+
+      p {
+        margin-right: 10px;
+      }
+
+      p:nth-child(1) {
+        color: $blu;
+      }
+
+      p:nth-child(2) {
+        color: $red;
+      }
+    }
+  }
+
+  section:nth-child(3) {
+    p {
+      @incl
+      ude transform(rotate(-5deg));
+    }
+  }
+
+  section:nth-child(4){
+    .warning{
+      @extend %extends;
+      background-color: yellow;
+    }
+    .danger{
+      @extend %extends;
+      background-color: red;
+    }
+    .help{
+      @extend %extends;
+      background-color: green;
+    }
+  }
+
+  section:nth-child(5){
+    a{
+      padding: 5px;
+      color: #fff;
+      background-color: $red;
+      &:hover{
+        color: #000;
+        background-color: $blu;
+      }
+    }
+  }
+
+  section:nth-child(6){
+    p{
+      font:{
+        size: 28px;
+        weight: bold;
+      }
+
+    }
+  }
+
+  section:nth-child(7){
+    button{
+      @each $key, $value in $state{
+
+        &--#{$key}{
+          background-color: $value;
+        }
+
+      }
+    }
+  }
+
+}
